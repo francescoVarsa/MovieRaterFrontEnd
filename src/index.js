@@ -5,16 +5,23 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Auth from './components/authentication';
+import { CookiesProvider } from 'react-cookie';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Route exact path="/" component={Auth} />
-      <Route exact path="/movies" component={App} />
-    </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+function Router() {
+
+  return (
+    <React.StrictMode>
+      <CookiesProvider>
+        <BrowserRouter>
+          <Route exact path="/" component={Auth} />
+          <Route exact path="/movies" component={App} />
+        </BrowserRouter>
+      </CookiesProvider>
+    </React.StrictMode>
+  )
+}
+
+ReactDOM.render(<Router />, document.getElementById('root'));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useCookies } from 'react-cookie'
 import { API } from '../api-service'
 
 function Auth() {
@@ -6,9 +7,16 @@ function Auth() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
+    const [token, setToken] = useCookies(['mr-token'])
+
+    useEffect(() => {
+        console.log(token)
+        if (token['mr-token']) window.location.href = '/movies'
+    }, [token])
+
     const loginClicked = () => {
         API.loginUser({username, password})
-        .then(resp => console.log(resp.token))
+        .then(resp => setToken('mr-token', resp.token))
         .catch(err => console.log(err))
     }
 
