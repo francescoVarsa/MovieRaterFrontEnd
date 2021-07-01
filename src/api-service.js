@@ -15,13 +15,13 @@ export class API {
             .then(res => res.json())
 
     }
-    static updateMovie(mov_id, body) {
+    static updateMovie(mov_id, body, token) {
         const RATE_URL = `http://127.0.0.1:8000/api/movies/${mov_id}/`
         const FETCH_OPTIONS = {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Token ${TOKEN}`
+                'Authorization': `Token ${token}`
             },
             body: JSON.stringify(body)
         }
@@ -30,13 +30,13 @@ export class API {
 
     }
 
-    static createMovie(body) {
+    static createMovie(body, token) {
         const CREATE_NEW_MOVIE_URL = `http://127.0.0.1:8000/api/movies/`
         const FETCH_OPTIONS = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Token ${TOKEN}`
+                'Authorization': `Token ${token}`
             },
             body: JSON.stringify(body)
         }
@@ -44,13 +44,13 @@ export class API {
             .then(res => res.json())
     }
 
-    static deleteMovie(mov_id) {
+    static deleteMovie(mov_id, token) {
         const DELETE_MOVIE_URL = `http://127.0.0.1:8000/api/movies/${mov_id}/`
         const FETCH_OPTIONS = {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Token ${TOKEN}`
+                'Authorization': `Token ${token}`
             },
         }
         return fetch(DELETE_MOVIE_URL, FETCH_OPTIONS)
